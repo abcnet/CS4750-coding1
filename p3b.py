@@ -5,7 +5,8 @@ class PIDController(object):
         self.kp = kp
         self.ki = ki
         self.kd = kd
-        self.error_history = []
+        self.error_sum = 0
+        self.prev_error = 0
         self.theta = setpoint
 
     # Return the voltage setting for the motor to make it reach
@@ -22,13 +23,14 @@ class PIDController(object):
         # print(" self.error_history[-1] = ",  self.error_history[-1])
         # print ("diff ", current_error - self.error_history[-1])
         # print (self.kd * (current_error - self.error_history[-1]))
-        d = (self.kd * (current_error - self.error_history[-1])) if (len(self.error_history) >= 1) else 0
+        d = self.kd * (current_error - self.prev_error) 
         print ("d = ", d)
-        i = self.ki * sum(self.error_history)
+        i = self.ki * self.error_sum
         print ("p, i, d are", p, i, d)
         tmp = p + i + d
         print ("tmp = ", tmp)
-        self.error_history.append(current_error)
-        if len(self.error_history >= 1000):
-            error_history.pop(0)
+        self.prev_error = current_error
+        self.error_sum += current_error
+        # if len(self.error_history) >= 20000:
+        #     error_history.pop(0)
         return tmp
