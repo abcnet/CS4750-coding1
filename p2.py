@@ -11,6 +11,5 @@ def joint_force(lengths, thetas, masses, alpha):
     tmp = m2 * l2 / 2.0 * math.cos(t1 + t2)
     tau1 = ((m1 / 2.0 + m2) * l1 * math.cos(t1) + tmp) * g
     tau2 = tmp * g
-    print (tau1, tau2)
-    # use the scaling factor of -1.93 on the piazza post
-    return (-1.93 * tau1, -1.93 * tau2)
+    # print (tau1, tau2)
+    return (-tau1, -tau2)
