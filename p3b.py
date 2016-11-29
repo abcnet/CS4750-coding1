@@ -15,14 +15,6 @@ class PIDController(object):
         print ("kp, ki, kd, setpoint, current_angle are ", self.kp, self.ki, self.kd, self.theta, current_angle)
         current_error = self.theta - current_angle
         p = self.kp * current_error
-        # print ("p = ", p)
-        # print (len(self.error_history) >= 1)
-        # print ("kd = ", self.kd)
-        # print("current_error = ", current_error)
-        # print ("self.error_history = ", self.error_history)
-        # print(" self.error_history[-1] = ",  self.error_history[-1])
-        # print ("diff ", current_error - self.error_history[-1])
-        # print (self.kd * (current_error - self.error_history[-1]))
         d = self.kd * (current_error - self.prev_error) 
         print ("d = ", d)
         i = self.ki * self.error_sum
@@ -31,6 +23,4 @@ class PIDController(object):
         print ("tmp = ", tmp)
         self.prev_error = current_error
         self.error_sum += current_error
-        # if len(self.error_history) >= 20000:
-        #     error_history.pop(0)
         return tmp
