@@ -1,0 +1,1 @@
+This is trivally implemented. tune() just trivially calls get_voltage(), and set_setpoint() just updates theta to  the new setpoint.
